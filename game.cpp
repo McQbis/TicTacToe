@@ -4,6 +4,16 @@
 
 using namespace std;
 
+Field f1('n', 0, 0);
+Field f2('n', 0, 1);
+Field f3('n', 0, 2);
+Field f4('n', 1, 0);
+Field f5('n', 1, 1);
+Field f6('n', 1, 2);
+Field f7('n', 2, 0);
+Field f8('n', 2, 1);
+Field f9('n', 2, 2);
+
 Game::Game()
 {
     SDL_Init(0);
@@ -11,9 +21,9 @@ Game::Game()
     SDL_SetWindowTitle(win, "Kółko i krzyżyk");
     running = true;
     count = 0;
-    field.setDest(50, 50, 100, 100);
-    field.setSrc(0, 0, 100, 100);
-    field.setImg("img/nic.bmp", ren);
+    // field.setDest(50, 50, 100, 100);
+    // field.setSrc(0, 0, 100, 100);
+    // field.setImg("img/nic.bmp", ren);
     loop();
 }
 
@@ -54,7 +64,16 @@ void Game::render()
     rect.h = 600;
     SDL_RenderFillRect(ren, &rect);
 
-    field.draw(ren);
+    // field.draw(ren);
+    f1.placeIt(ren);
+    f2.placeIt(ren);
+    f3.placeIt(ren);
+    f4.placeIt(ren);
+    f5.placeIt(ren);
+    f6.placeIt(ren);
+    f7.placeIt(ren);
+    f8.placeIt(ren);
+    f9.placeIt(ren);
 
     frameCount++;
     int timerFPS = SDL_GetTicks() - lastFrame;

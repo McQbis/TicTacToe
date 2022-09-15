@@ -4,6 +4,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "object.h"
+#include "field.h"
 
 using namespace std;
 
@@ -15,7 +16,6 @@ private:
     bool running, fullscreen;
     int count;
     int frameCount, timerFPS, lastFrame;
-    Object field;
 public:
     friend void Object::draw(SDL_Renderer* ren);
     Game();
