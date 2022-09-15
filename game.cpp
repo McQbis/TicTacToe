@@ -13,22 +13,23 @@ Field f6('n', 1, 2);
 Field f7('n', 2, 0);
 Field f8('n', 2, 1);
 Field f9('n', 2, 2);
+PlayerTurn turn('o');
 
 Game::Game()
 {
     SDL_Init(0);
     SDL_CreateWindowAndRenderer(1000, 600, 0, &win, &ren);
     SDL_SetWindowTitle(win, "Kółko i krzyżyk");
+    TTF_Init();
+    font = TTF_OpenFont("Sans.ttf", 70);
     running = true;
     count = 0;
-    // field.setDest(50, 50, 100, 100);
-    // field.setSrc(0, 0, 100, 100);
-    // field.setImg("img/nic.bmp", ren);
     loop();
 }
 
 Game::~Game()
 {
+    TTF_Quit();
     SDL_DestroyRenderer(ren);
     SDL_DestroyWindow(win);
     SDL_Quit();
@@ -64,7 +65,6 @@ void Game::render()
     rect.h = 600;
     SDL_RenderFillRect(ren, &rect);
 
-    // field.draw(ren);
     f1.placeIt(ren);
     f2.placeIt(ren);
     f3.placeIt(ren);
@@ -74,6 +74,8 @@ void Game::render()
     f7.placeIt(ren);
     f8.placeIt(ren);
     f9.placeIt(ren);
+    turn.placeIt(ren);
+    Font("KOLEJ GRACZA", 510, 50, 255, 255, 255, 255);
 
     frameCount++;
     int timerFPS = SDL_GetTicks() - lastFrame;
@@ -97,6 +99,26 @@ void Game::update()
     if( fullscreen ) SDL_SetWindowFullscreen(win, 0);
 }
 
+void Game::Font(const char* msg, int x, int y, int r, int g, int b, int a)
+{
+    SDL_Surface* surf;
+    SDL_Texture* tex;
+    SDL_Color color;
+    color.r = r;
+    color.g = g;
+    color.b = b;
+    color.a = a;
+    SDL_Rect rect;
+    surf = TTF_RenderText_Solid(font, msg, color);
+    tex = SDL_CreateTextureFromSurface(ren, surf);
+    rect.x = x;
+    rect.y = y;
+    rect.h = surf -> h;
+    rect.w = surf -> w;
+    SDL_FreeSurface(surf);
+    SDL_RenderCopy(ren, tex, NULL, &rect);
+    SDL_DestroyTexture(tex);
+}
 
 
 
