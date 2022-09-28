@@ -21,5 +21,27 @@ void Field::placeIt(SDL_Renderer* ren)
     o.draw(ren);
 }
 
+// void Field::setCursor(SDL_Rect mouse)
+// {
+//     // if (state == 110 & mx > 50+150*x & mx < 200+150*x & my > 50+150*y & my < 200+150*y) 
+//     // {
+//     //     SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
+//     // } else {
+//     //     SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW));
+//     // }
+
+//     if (SDL_HasIntersection(&o.dest, &mouse))
+//     {
+//         SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
+//     } else {
+//         SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW));
+//     }
+// }
+
+void Field::change()
+{
+    state = 'o';
+}
+
 
 

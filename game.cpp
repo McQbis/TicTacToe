@@ -85,10 +85,32 @@ void Game::render()
 
 void Game::input()
 {
+    SDL_Rect mouse;
+    mouse.h = 1;
+    mouse.w = 1;
+    int x, y;
     SDL_Event e;
     while ( SDL_PollEvent(&e) )
     {
         if (e.type == SDL_QUIT) running = false;
+        SDL_GetMouseState(&mouse.x, &mouse.y);
+        if(SDL_HasIntersection(&f1.o.dest, &mouse))
+            {
+                SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
+            }
+        if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT)
+        {
+            if(SDL_HasIntersection(&f1.o.dest, &mouse))
+            {
+                f1.change();
+                turn.change();
+            } else if (SDL_HasIntersection(&f2.o.dest, &mouse))
+            {
+                f2.change();
+                turn.change();
+            }
+        }
+        
     }
     const Uint8 *keystates = SDL_GetKeyboardState(NULL);
     if ( keystates[SDL_SCANCODE_ESCAPE] ) running = false;
@@ -119,7 +141,5 @@ void Game::Font(const char* msg, int x, int y, int r, int g, int b, int a)
     SDL_RenderCopy(ren, tex, NULL, &rect);
     SDL_DestroyTexture(tex);
 }
-
-
 
 

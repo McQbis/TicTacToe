@@ -18,3 +18,8 @@ void PlayerTurn::placeIt(SDL_Renderer* ren)
     }
     o.draw(ren);
 }
+
+void PlayerTurn::change()
+{
+    state = 'x';
+}

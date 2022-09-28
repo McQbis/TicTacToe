@@ -8,10 +8,11 @@ using namespace std;
 
 class Object {
 private:
-    SDL_Rect dest;
+    // SDL_Rect dest;
     SDL_Rect src;
     SDL_Texture* tex;
 public:
+    SDL_Rect dest;
     Object() {}
     ~Object() {}
     void setDest(int x, int y, int w, int h);
