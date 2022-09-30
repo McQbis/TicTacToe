@@ -7,6 +7,7 @@
 #include "field.h"
 #include "playersTurn.h"
 #include <SDL2/SDL_ttf.h>
+#include "button.h"
 
 using namespace std;
 

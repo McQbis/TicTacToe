@@ -14,6 +14,7 @@ Field f7('n', 2, 0);
 Field f8('n', 2, 1);
 Field f9('n', 2, 2);
 PlayerTurn turn('o');
+Button menu(550, 400);
 
 int timer;
 bool timeStop = 0;
@@ -82,6 +83,7 @@ void Game::render()
     f8.placeIt(ren);
     f9.placeIt(ren);
     turn.placeIt(ren);
+    menu.placeIt("img/menu.bmp", ren);
     Font("KOLEJ GRACZA", 510, 50, 255, 255, 255, 255);
     sprintf(str, "CZAS NA RUCH: %d", timer/60);
     Font(str, 510, 300, 255, 255, 255, 255);
@@ -207,6 +209,11 @@ void Game::input()
                     f9.change(turn.state);
                     turn.change();
                 } 
+            }
+            else if(SDL_HasIntersection(&menu.o.dest, &mouse))
+            {
+                SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
+                if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT) cout << "działa";
             }
             else
             {
