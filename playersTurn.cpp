@@ -21,5 +21,14 @@ void PlayerTurn::placeIt(SDL_Renderer* ren)
 
 void PlayerTurn::change()
 {
-    state = 'x';
+    switch (state)
+    {
+    case 'o':
+        state = 'x';
+        break;
+    
+    default:
+        state = 'o';
+        break;
+    }
 }
