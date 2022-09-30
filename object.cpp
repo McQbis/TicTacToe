@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 void Object::setDest(int x, int y, int w, int h) {
     dest.x = x;
     dest.y = y;
