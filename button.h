@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include "object.h"
 #include "game.h"
+#include "menu.h"
 
 class Button
 {
@@ -13,6 +14,7 @@ private:
     Object o;
 public:
     friend class Game;
+    friend class Menu;
     Button(int x, int y);
     ~Button();
     void placeIt(std::string img, SDL_Renderer *ren);

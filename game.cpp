@@ -15,9 +15,13 @@ Field f8('n', 2, 1);
 Field f9('n', 2, 2);
 PlayerTurn turn('o');
 Button menu(550, 400);
+Menu MENU('a');
+Button newGame(250, 50);
+Button cont(250, 200);
+Button ex(250, 350);
 
 int timer;
-bool timeStop = 0;
+bool timeStop = 1;
 char str[30];
 
 Game::Game()
@@ -97,9 +101,21 @@ void Game::render()
         (f1.state == f4.state && f1.state == f7.state && f1.state != 'n') ||
         (f3.state == f6.state && f3.state == f9.state && f3.state != 'n')) || timer <= 0 )
         {
-            Font("KONIEC", 450, 200, 255, 0, 0, 255);
+            MENU.state = 'a';
             timeStop = 1;
         }
+    
+    if(MENU.state != 99)
+    {
+        SDL_Rect rect;
+        rect.x = rect.y = 0;
+        rect.w = 1000;
+        rect.h = 600;
+        SDL_RenderFillRect(ren, &rect);
+        newGame.placeIt("img/nowa gra.bmp", ren);
+        if (MENU.state == 'd') cont.placeIt("img/wznow.bmp", ren);
+        ex.placeIt("img/wyjdz.bmp", ren);
+    }
 
     frameCount++;
     int timerFPS = SDL_GetTicks() - lastFrame;
@@ -213,15 +229,55 @@ void Game::input()
             else if(SDL_HasIntersection(&menu.o.dest, &mouse))
             {
                 SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
-                if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT) cout << "działa";
+                if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT)
+                { 
+                    MENU.state = 'd';
+                    timeStop = 1;
+                }
             }
             else
             {
                 SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW));
             }
         } else {
-            SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW));
-        }  
+                if (SDL_HasIntersection(&newGame.o.dest, &mouse))
+                {
+                    SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
+                    if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT)
+                    {
+                        MENU.state = 'c';
+                        timeStop = 0;
+                        timer = 650;
+                        f1.state = 'n';
+                        f2.state = 'n';
+                        f3.state = 'n';
+                        f4.state = 'n';
+                        f5.state = 'n';
+                        f6.state = 'n';
+                        f7.state = 'n';
+                        f8.state = 'n';
+                        f9.state = 'n';
+                    }
+                } else if (SDL_HasIntersection(&cont.o.dest, &mouse) && MENU.state == 'd')
+                {
+                    SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
+                    if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT)
+                    {
+                        MENU.state = 'c';
+                        timeStop = 0;
+                    }
+                } else if (SDL_HasIntersection(&ex.o.dest, &mouse))
+                {
+                    SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
+                    if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT)
+                    {
+                        SDL_Quit();
+                        running = false;
+                    }
+                } else {
+                    SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW));
+                }
+        }
     }
     const Uint8 *keystates = SDL_GetKeyboardState(NULL);
     if ( keystates[SDL_SCANCODE_ESCAPE] ) running = false;

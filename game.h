@@ -8,6 +8,7 @@
 #include "playersTurn.h"
 #include <SDL2/SDL_ttf.h>
 #include "button.h"
+#include "menu.h"
 
 using namespace std;
 
