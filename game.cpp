@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "game.h"
+#include <time.h>
 
 using namespace std;
 
@@ -75,14 +76,21 @@ void Game::loop()
         count++;
     }
 
-    timer = 600;
+    clock_t start = clock();
+    clock_t end;
+    float time;
 
     while (running)
     {
         render();
         input();
         update();
-        if (timeStop == 0) timer--;
+        end = clock();
+        time = end - start;
+        if (timeStop == 0 & time >= 1000){
+            start = clock(); 
+            timer--;
+        }
     }
 
     if (count > 3) running = false;
@@ -111,7 +119,7 @@ void Game::render()
         turn.placeIt(ren);
         menu.placeIt(ren);
         Font("KOLEJ GRACZA", 510, 50, 255, 255, 255, 255);
-        sprintf(str, "CZAS NA RUCH: %d", timer/60);
+        sprintf(str, "CZAS NA RUCH: %d", timer);
         Font(str, 510, 300, 255, 255, 255, 255);
 
         if (((f1.state == f2.state && f1.state == f3.state && f1.state != 'n') ||
@@ -148,7 +156,7 @@ void Game::input()
                 SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
                 if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT & f1.state == 'n')
                 {
-                    timer = 600;
+                    timer = 5;
                     f1.change(turn.state, ren);
                     turn.change(ren);
                 } 
@@ -158,7 +166,7 @@ void Game::input()
                 SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
                 if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT & f2.state == 'n')
                 {
-                    timer = 600;
+                    timer = 5;
                     f2.change(turn.state, ren);
                     turn.change(ren);
                 } 
@@ -168,7 +176,7 @@ void Game::input()
                 SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
                 if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT & f3.state == 'n')
                 {
-                    timer = 600;
+                    timer = 5;
                     f3.change(turn.state, ren);
                     turn.change(ren);
                 } 
@@ -178,7 +186,7 @@ void Game::input()
                 SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
                 if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT & f4.state == 'n')
                 {
-                    timer = 600;
+                    timer = 5;
                     f4.change(turn.state, ren);
                     turn.change(ren);
                 } 
@@ -188,7 +196,7 @@ void Game::input()
                 SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
                 if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT & f5.state == 'n')
                 {
-                    timer = 600;
+                    timer = 5;
                     f5.change(turn.state, ren);
                     turn.change(ren);
                 } 
@@ -198,7 +206,7 @@ void Game::input()
                 SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
                 if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT & f6.state == 'n')
                 {
-                    timer = 600;
+                    timer = 5;
                     f6.change(turn.state, ren);
                     turn.change(ren);
                 } 
@@ -208,7 +216,7 @@ void Game::input()
                 SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
                 if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT & f7.state == 'n')
                 {
-                    timer = 600;
+                    timer = 5;
                     f7.change(turn.state, ren);
                     turn.change(ren);
                 } 
@@ -218,7 +226,7 @@ void Game::input()
                 SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
                 if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT & f8.state == 'n')
                 {
-                    timer = 600;
+                    timer = 5;
                     f8.change(turn.state, ren);
                     turn.change(ren);
                 } 
@@ -228,7 +236,7 @@ void Game::input()
                 SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
                 if (e.type == SDL_MOUSEBUTTONDOWN & e.button.button == SDL_BUTTON_LEFT & f9.state == 'n')
                 {
-                    timer = 600;
+                    timer = 5;
                     f9.change(turn.state, ren);
                     turn.change(ren);
                 } 
@@ -254,7 +262,7 @@ void Game::input()
                     {
                         MENU.state = 'c';
                         timeStop = 0;
-                        timer = 650;
+                        timer = 5;
                         f1.state = 'n';
                         f2.state = 'n';
                         f3.state = 'n';
