@@ -11,15 +11,10 @@ PlayerTurn::PlayerTurn(char stat)
 
 void PlayerTurn::placeIt(SDL_Renderer* ren)
 {
-    if(state == 111){
-        o.setImg("img/o.bmp", ren);
-    }else{
-        o.setImg("img/x.bmp", ren);
-    }
     o.draw(ren);
 }
 
-void PlayerTurn::change()
+void PlayerTurn::change(SDL_Renderer* ren)
 {
     switch (state)
     {
@@ -30,5 +25,10 @@ void PlayerTurn::change()
     default:
         state = 'o';
         break;
+    }
+    if(state == 111){
+        o.setImg("img/o.bmp", ren);
+    }else{
+        o.setImg("img/x.bmp", ren);
     }
 }

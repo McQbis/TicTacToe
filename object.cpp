@@ -1,7 +1,6 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "object.h"
-#include "game.h"
 
 using namespace std;
 
@@ -20,13 +19,12 @@ void Object::setSrc(int x, int y, int w, int h) {
 }
 
 void Object::setImg(string filename, SDL_Renderer* ren) {
-    SDL_Surface* surf = SDL_LoadBMP(filename.c_str());
+    surf = SDL_LoadBMP(filename.c_str());
+    surf = SDL_ConvertSurface(surf, surf -> format, 0);
     tex = SDL_CreateTextureFromSurface(ren, surf);
 }
 
 void Object::draw(SDL_Renderer* ren)
 {
-    SDL_Rect dest = getDest();
-    SDL_Rect src = getSrc();
-    SDL_RenderCopyEx(ren, getTex(), &src, &dest, 0 , NULL, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ren, tex, &src, &dest, 0 , NULL, SDL_FLIP_NONE);
 }

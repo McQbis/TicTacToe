@@ -21,6 +21,14 @@ private:
     int count;
     int frameCount, timerFPS, lastFrame;
     TTF_Font* font;
+    SDL_Rect rect;
+    SDL_Rect mouse;
+    SDL_Event e;
+    SDL_Surface* fontSurf;
+    SDL_Texture* fontTex;
+    SDL_Color fontColor;
+    SDL_Rect fontRect;
+
 public:
     friend void Object::draw(SDL_Renderer* ren);
     Game();

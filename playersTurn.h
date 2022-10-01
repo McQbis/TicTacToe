@@ -16,7 +16,7 @@ public:
     PlayerTurn(char='o');
     ~PlayerTurn() {}
     void placeIt(SDL_Renderer* ren);
-    void change();
+    void change(SDL_Renderer* ren);
 };
 
 #endif //PLAYERSTURN_H

@@ -11,27 +11,24 @@ Field::Field(char stat, int x, int y)
 
 void Field::placeIt(SDL_Renderer* ren)
 {
-    if(state == 110){
-        o.setImg("img/nic.bmp", ren);
-    }else if(state == 111){
-        o.setImg("img/o.bmp", ren);
-    }else{
-        o.setImg("img/x.bmp", ren);
-    }
     o.draw(ren);
 }
 
-void Field::change(char turn)
+void Field::change(char turn, SDL_Renderer* ren)
 {
     switch (turn)
     {
     case 'x':
         state = 'x';
         break;
-    
     default:
         state = 'o';
         break;
+    }
+    if(state == 111){
+        o.setImg("img/o.bmp", ren);
+    }else{
+        o.setImg("img/x.bmp", ren);
     }
 }
 

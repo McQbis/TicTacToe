@@ -17,7 +17,7 @@ public:
     friend class Menu;
     Button(int x, int y);
     ~Button();
-    void placeIt(std::string img, SDL_Renderer *ren);
+    void placeIt(SDL_Renderer *ren);
 };
 
 #endif //BUTTON_H

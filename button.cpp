@@ -8,9 +8,8 @@ Button::Button(int x, int y)
     o.setSrc(0, 0, 350, 100);
 }
 
-void Button::placeIt(std::string img, SDL_Renderer *ren)
+void Button::placeIt(SDL_Renderer *ren)
 {
-    o.setImg(img.c_str(), ren);
     o.draw(ren);
 }
 

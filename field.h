@@ -18,7 +18,7 @@ public:
     ~Field() {}
     void placeIt(SDL_Renderer* ren);
     void setCursor(SDL_Rect mouse);
-    void change(char turn);
+    void change(char turn, SDL_Renderer* ren);
 };
 
 #endif //FIELD_H

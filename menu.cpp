@@ -1,7 +1,6 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "menu.h"
-#include "game.h"
 
 Menu::Menu(char stat)
 {
